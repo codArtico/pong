@@ -12,12 +12,14 @@ class Jogo:
         #Sprites
         self.sprites = pygame.sprite.Group()
         self.barrinhaSprites = pygame.sprite.Group()
+        self.player1 = Player((self.sprites, self.barrinhaSprites),1)
+        self.player2 = Player((self.sprites, self.barrinhaSprites),2)
 
     def run(self):
         
         while self.running:
             
-            dt = self.fps.tick() / 1000
+            dt = self.fps.tick(60) / 1000
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
