@@ -6,8 +6,10 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
         self.nump = nump
 
-        self.image = pygame.Surface(tamanhos['barrinha'])
-        self.image.fill(cores['barrinha'])
+        self.image = pygame.Surface(tamanhos['barrinha'],pygame.SRCALPHA)
+        pygame.draw.rect(self.image, cores['barrinha'], pygame.Rect((0, 0), tamanhos['barrinha']), border_radius=10)
+
+        self.rect = self.image.get_rect()
 
         if nump == 1:
             self.rect = self.image.get_rect(center = pos['player1'])
@@ -40,8 +42,8 @@ class Bola(pygame.sprite.Sprite):
     def __init__(self, groups, barrinhaSprite):
         super().__init__(groups)
 
-        self.image = pygame.Surface(tamanhos['bola'])
-        self.image.fill(cores['bola'])
+        self.image = pygame.Surface(tamanhos['bola'], pygame.SRCALPHA)
+        pygame.draw.circle(self.image,cores['bola'],(tamanhos['bola'][0]/2,tamanhos['bola'][1]/2),tamanhos['bola'][0]/2)
 
         self.rect = self.image.get_rect(center = pos['bola'])
         self.direction = pygame.Vector2((choice([1,-1])), uniform(0.7, 0.8) * choice([-1,1]))
