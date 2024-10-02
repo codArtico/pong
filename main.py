@@ -1,4 +1,5 @@
 from configs import *
+from sprites import *
 
 class Jogo:
     def __init__(self):
@@ -8,14 +9,24 @@ class Jogo:
         self.fps = pygame.time.Clock()
         self.running = True
 
+        #Sprites
+        self.sprites = pygame.sprite.Group()
+        self.barrinhaSprites = pygame.sprite.Group()
+
     def run(self):
         
         while self.running:
-            self.tela.fill(cores['bg'])
+            
             dt = self.fps.tick() / 1000
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+
+            # Atualizar sprites 
+            self.sprites.update(dt)
+
+            self.tela.fill(cores['bg'])
+            self.sprites.draw(self.tela)
 
             pygame.display.update()
 
