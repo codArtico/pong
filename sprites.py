@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, groups, nump):
         super().__init__(groups)
         self.nump = nump
-
+        self.pontuacao = 0
         self.image = pygame.Surface(tamanhos['barrinha'],pygame.SRCALPHA)
         pygame.draw.rect(self.image, cores['barrinha'], pygame.Rect((0, 0), tamanhos['barrinha']), border_radius=10)
 
@@ -64,18 +64,19 @@ class Bola(pygame.sprite.Sprite):
         for sprite in self.barrinhaSprites:
             if sprite.rect.colliderect(self.rect):
                 if direction == 'horizontal':
-                    # Colisão com o Player 1 (barrinha da direita)
-                    if self.direction.x > 0:  # Bola indo para a direita
-                        if self.rect.right > sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
-                            self.rect.right = sprite.rect.left
-                            self.direction.x *= -1  # Invertendo a direção no eixo x
-
-                    # Colisão com o Player 2 (barrinha da esquerda)
-                    elif self.direction.x < 0:  # Bola indo para a esquerda
-                        if self.rect.left < sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
-                            self.rect.left = sprite.rect.right
-                            self.direction.x *= -1  # Invertendo a direção no eixo x
-
+                    if self.rect.right >= sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
+                        self.rect.right = sprite.rect.left
+                        self.direction.x *= -1
+                    if self.rect.left < sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
+                        self.rect.left = sprite.rect.right
+                        self.direction.x *= -1
+                else:
+                    if self.rect.bottom >= sprite.rect.top and self.old_rect.bottom <= sprite.old_rect.top:
+                        self.rect.bottom = sprite.rect.top
+                        self.direction.y *= -1
+                    if self.rect.top <= sprite.rect.bottom and self.old_rect.top >= sprite.old_rect.bottom:
+                        self.rect.top = sprite.rect.bottom
+                        self.direction.y *= -1
 
     
     def colisaoParede(self):
