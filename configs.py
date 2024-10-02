@@ -9,12 +9,12 @@ tamanhos = {
 }
 
 pos = {
-    'player1':(telaLargura-50, telaAltura/2),
-    'player2':(50, telaAltura/2),
+    'player1':(50, telaAltura/2),
+    'player2':(telaLargura-50, telaAltura/2),
     'bola':(telaLargura/2,telaAltura/2)
 }
 velocidades = {
-    'barrinha': 500, 'bola':450
+    'jogador': 500, 'bola':450
 }
 cores = {
     'barrinha' : (0,0,0),

@@ -1,7 +1,7 @@
 from configs import *
 from random import choice, uniform
 
-class Player(pygame.sprite.Sprite):
+class Barrinha(pygame.sprite.Sprite):
     def __init__(self, groups, nump):
         super().__init__(groups)
         self.nump = nump
@@ -13,21 +13,29 @@ class Player(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(center = pos['player1'])
             self.old_rect = self.rect.copy()
         else:
-
             self.rect = self.image.get_rect(center = pos['player2'])
             self.old_rect = self.rect.copy()
         self.direcao = 0
-        self.velocidade = velocidades['barrinha']
-
+        
     def move(self,dt):
         self.rect.centery += self.direcao * self.velocidade * dt
         self.rect.top = 0 if self.rect.top < 0 else self.rect.top
         self.rect.bottom = telaAltura if self.rect.bottom > telaAltura else self.rect.bottom
+
+    def update(self, dt):
+        self.old_rect = self.rect.copy()
+        self.getDirecao()
+        self.move(dt)
+
+class Player(Barrinha):
+    def __init__(self, groups,nump):
+        super().__init__(groups,nump)
+        self.velocidade = velocidades['jogador']
     
     def getDirecao(self):
         keys = pygame.key.get_pressed()
 
-        if self.nump == 1:
+        if self.nump == 2:
             direcao_cima = int(keys[pygame.K_UP])
             direcao_baixo = int(keys[pygame.K_DOWN])
         else:
@@ -35,10 +43,12 @@ class Player(pygame.sprite.Sprite):
             direcao_baixo = int(keys[pygame.K_s])
         self.direcao = direcao_baixo - direcao_cima
 
-    def update(self, dt):
-        self.old_rect = self.rect.copy()
-        self.getDirecao()
-        self.move(dt)
+class IA(Barrinha):
+    def __init__(self, groups, nump, ball):
+        pass
+    def get_direction():
+        pass
+
 
 class Bola(pygame.sprite.Sprite):
     def __init__(self, groups, barrinhaSprites):
