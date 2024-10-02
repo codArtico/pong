@@ -14,6 +14,7 @@ class Jogo:
         self.barrinhaSprites = pygame.sprite.Group()
         self.player1 = Player((self.sprites, self.barrinhaSprites),1)
         self.player2 = Player((self.sprites, self.barrinhaSprites),2)
+        self.bola = Bola(self.sprites, self.barrinhaSprites)     
 
     def run(self):
         

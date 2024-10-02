@@ -1,4 +1,5 @@
 from configs import *
+from random import choice, uniform
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, groups, nump):
@@ -34,3 +35,37 @@ class Player(pygame.sprite.Sprite):
     def update(self, dt):
         self.getDirecao()
         self.move(dt)
+
+class Bola(pygame.sprite.Sprite):
+    def __init__(self, groups, barrinhaSprite):
+        super().__init__(groups)
+
+        self.image = pygame.Surface(tamanhos['bola'])
+        self.image.fill(cores['bola'])
+
+        self.rect = self.image.get_rect(center = pos['bola'])
+        self.direction = pygame.Vector2((choice([1,-1])), uniform(0.7, 0.8) * choice([-1,1]))
+
+    def move(self,dt):
+        self.rect.center += self.direction * velocidades['bola'] * dt
+    
+    def colisaoParede(self):
+        if self.rect.top <= 0:
+            self.rect.top = 0
+            self.direction.y *= -1
+
+        if self.rect.bottom >= telaAltura:
+            self.rect.bottom = telaAltura
+            self.direction.y *= -1
+
+        if self.rect.left <= 0:
+            self.rect.left = 0
+            self.direction.x *= -1
+
+        if self.rect.right >= telaLargura:
+            self.rect.right = telaLargura
+            self.direction.x *= -1
+
+    def update(self, dt):
+        self.move(dt)
+        self.colisaoParede()
