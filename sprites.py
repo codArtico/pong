@@ -104,10 +104,10 @@ class Bola(pygame.sprite.Sprite):
 
         
         if self.rect.left <= 0:
-            self.gol('player2')
+            self.gol('player1')
             self.reset()
         elif self.rect.right >= telaLargura:
-            self.gol('player1')
+            self.gol('player2')
             self.reset()
 
     def update(self, dt):

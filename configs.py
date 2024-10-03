@@ -15,9 +15,9 @@ def get_resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 # Use a função para obter os caminhos das imagens
-bgCaminho = get_resource_path(os.path.join('imagens', 'Quadra.jpg'))
-mainMenuCaminho = get_resource_path(os.path.join('imagens', 'TelaInicial.jpg'))
-iconCaminho = get_resource_path(os.path.join('imagens', 'quadra.ico'))
+bgCaminho = get_resource_path(os.path.join('pong','imagens', 'Quadra.jpg'))
+mainMenuCaminho = get_resource_path(os.path.join('pong','imagens', 'TelaInicial.jpg'))
+iconCaminho = get_resource_path(os.path.join('pong','imagens', 'quadra.ico'))
 
 
 telaLargura, telaAltura = 1280,720
