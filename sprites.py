@@ -53,24 +53,27 @@ class IA(Barrinha):
 
 
 class Bola(pygame.sprite.Sprite):
-    def __init__(self, groups, barrinhaSprites):
+    def __init__(self, groups, barrinhaSprites, gol):
         super().__init__(groups)
         self.barrinhaSprites = barrinhaSprites
+        self.gol = gol
 
         self.image = pygame.Surface(tamanhos['bola'], pygame.SRCALPHA)
-        pygame.draw.circle(self.image,cores['bola'],(tamanhos['bola'][0]/2,tamanhos['bola'][1]/2),tamanhos['bola'][0]/2)
+        pygame.draw.circle(self.image, cores['bola'], (tamanhos['bola'][0] // 2, tamanhos['bola'][1] // 2), tamanhos['bola'][0] // 2)
 
-        self.rect = self.image.get_rect(center = pos['bola'])
+        self.rect = self.image.get_rect(center=pos['bola'])
         self.old_rect = self.rect.copy()
-        self.direction = pygame.Vector2((choice([1,-1])), uniform(0.7, 0.8) * choice([-1,1]))
+        self.direction = pygame.Vector2(choice([1, -1]), uniform(0.7, 0.8) * choice([-1, 1]))
 
-    def move(self,dt):
+    def move(self, dt):
         self.rect.x += self.direction.x * velocidades['bola'] * dt
         self.colisao('horizontal')
         self.rect.y += self.direction.y * velocidades['bola'] * dt
         self.colisao('vertical')
 
-
+    def reset(self):
+        self.rect.center = pos['bola']
+        self.direction = pygame.Vector2(choice([1, -1]), uniform(0.7, 0.8) * choice([-1, 1]))
 
     def colisao(self, direction):
         for sprite in self.barrinhaSprites:
@@ -79,7 +82,7 @@ class Bola(pygame.sprite.Sprite):
                     if self.rect.right >= sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
                         self.rect.right = sprite.rect.left
                         self.direction.x *= -1
-                    if self.rect.left < sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
+                    if self.rect.left <= sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
                         self.rect.left = sprite.rect.right
                         self.direction.x *= -1
                 else:
@@ -90,7 +93,6 @@ class Bola(pygame.sprite.Sprite):
                         self.rect.top = sprite.rect.bottom
                         self.direction.y *= -1
 
-    
     def colisaoParede(self):
         if self.rect.top <= 0:
             self.rect.top = 0
@@ -100,13 +102,13 @@ class Bola(pygame.sprite.Sprite):
             self.rect.bottom = telaAltura
             self.direction.y *= -1
 
+        
         if self.rect.left <= 0:
-            self.rect.left = 0
-            self.direction.x *= -1
-
-        if self.rect.right >= telaLargura:
-            self.rect.right = telaLargura
-            self.direction.x *= -1
+            self.gol('player2')
+            self.reset()
+        elif self.rect.right >= telaLargura:
+            self.gol('player1')
+            self.reset()
 
     def update(self, dt):
         self.old_rect = self.rect.copy()

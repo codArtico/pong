@@ -13,9 +13,29 @@ class Jogo:
         self.sprites = pygame.sprite.Group()
         self.barrinhaSprites = pygame.sprite.Group()
         self.player1 = Player((self.sprites, self.barrinhaSprites),1)
-        self.bola = Bola(self.sprites, self.barrinhaSprites)
+        self.bola = Bola(self.sprites, self.barrinhaSprites,self.gol)
         #self.player2 = Player((self.sprites, self.barrinhaSprites),2) Jogável
         self.player2 = IA((self.sprites, self.barrinhaSprites),2,self.bola) #IA
+
+        #Placar
+        self.placar = {'player1':0,'player2':0}
+        self.font = pygame.font.Font(None,160)
+
+
+    def mostrarPlacar(self):
+        player1_surf = self.font.render(str(self.placar['player1']),True,cores['placar'])
+        player1_rect = player1_surf.get_rect(center=(telaLargura//2+100, telaAltura//2))
+        self.tela.blit(player1_surf, player1_rect)
+
+        player2_surf = self.font.render(str(self.placar['player2']),True,cores['placar'])
+        player2_rect = player2_surf.get_rect(center=(telaLargura//2-100, telaAltura//2))
+        self.tela.blit(player2_surf, player2_rect)
+
+    def gol(self, lado):
+        if lado == 'player1':
+            self.placar['player1'] += 1
+        elif lado == 'player2':
+            self.placar['player2'] += 1
 
     def run(self):
         
@@ -31,6 +51,7 @@ class Jogo:
 
             self.tela.fill(cores['bg'])
             self.sprites.draw(self.tela)
+            self.mostrarPlacar()
 
             pygame.display.update()
 
