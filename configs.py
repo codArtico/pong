@@ -1,5 +1,8 @@
 import pygame
+import os
 from os.path import join
+
+bgCaminho = os.path.join('pong','imagens','Quadra.jpg')
 
 telaLargura, telaAltura = 1280,720
 fps = 30
@@ -20,5 +23,5 @@ cores = {
     'barrinha' : (0,0,0),
     'bg' : (255,255,255),
     'bola' : (255,0,0),
-    'placar': (127,127,127)
+    'placar': (0,166,207)
 }

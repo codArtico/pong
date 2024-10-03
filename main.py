@@ -8,6 +8,7 @@ class Jogo:
         pygame.display.set_caption("Pong")
         self.fps = pygame.time.Clock()
         self.running = True
+        self.bg = pygame.image.load(bgCaminho)
 
         #Sprites
         self.sprites = pygame.sprite.Group()
@@ -24,11 +25,11 @@ class Jogo:
 
     def mostrarPlacar(self):
         player1_surf = self.font.render(str(self.placar['player1']),True,cores['placar'])
-        player1_rect = player1_surf.get_rect(center=(telaLargura//2+100, telaAltura//2))
+        player1_rect = player1_surf.get_rect(center=(telaLargura//2+250, telaAltura//2))
         self.tela.blit(player1_surf, player1_rect)
 
         player2_surf = self.font.render(str(self.placar['player2']),True,cores['placar'])
-        player2_rect = player2_surf.get_rect(center=(telaLargura//2-100, telaAltura//2))
+        player2_rect = player2_surf.get_rect(center=(telaLargura//2-250, telaAltura//2))
         self.tela.blit(player2_surf, player2_rect)
 
     def gol(self, lado):
@@ -46,12 +47,14 @@ class Jogo:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            # Atualizar sprites 
+            # Atualizar sprites
+            
             self.sprites.update(dt)
 
-            self.tela.fill(cores['bg'])
-            self.sprites.draw(self.tela)
+            self.tela.blit(self.bg,(0,0))
             self.mostrarPlacar()
+            self.sprites.draw(self.tela)
+            
 
             pygame.display.update()
 
