@@ -2,11 +2,24 @@ from configs import *
 from sprites import *
 from menus import *
 
+import sys
+import os
+
+if hasattr(sys, '_MEIPASS'):
+    caminho_imagem = os.path.join(sys._MEIPASS, 'imagens', 'imagem1.png')
+else:
+    caminho_imagem = os.path.join('imagens', 'imagem1.png')
+
+# Agora você pode carregar a imagem normalmente
+
+
 class Jogo:
     def __init__(self):
         pygame.init()
         self.tela = pygame.display.set_mode((telaLargura, telaAltura))
         pygame.display.set_caption("Pong")
+        self.icon = pygame.image.load(iconCaminho)
+        pygame.display.set_icon(self.icon)
         self.fps = pygame.time.Clock()
         self.running = True
         self.bg = pygame.image.load(bgCaminho)

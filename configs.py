@@ -2,8 +2,23 @@ import pygame
 import os
 from os.path import join
 
-bgCaminho = os.path.join('pong','imagens','Quadra.jpg')
-mainMenuCaminho = os.path.join('pong','imagens','TelaInicial.jpg')
+import os
+import sys
+
+def get_resource_path(relative_path):
+    """ Função para obter o caminho do recurso, mesmo dentro de um executável """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+# Use a função para obter os caminhos das imagens
+bgCaminho = get_resource_path(os.path.join('imagens', 'Quadra.jpg'))
+mainMenuCaminho = get_resource_path(os.path.join('imagens', 'TelaInicial.jpg'))
+iconCaminho = get_resource_path(os.path.join('imagens', 'quadra.ico'))
+
 
 telaLargura, telaAltura = 1280,720
 fps = 30
