@@ -12,7 +12,7 @@ Pong simula um jogo de tênis de mesa (ping-pong) e foi o primeiro jogo de grand
 * Random
 * Os
 
-## 📚 Estrutura de Classes
+## 🖥️ Estrutura de Classes
 
 # Main (Classe Principal)
   * Jogo
