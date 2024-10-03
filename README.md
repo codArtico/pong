@@ -12,15 +12,15 @@ Pong simula um jogo de tênis de mesa (ping-pong) e foi o primeiro jogo de grand
 * Random
 * Os
 
-## 🖥️ Estrutura de Classes
+# 🖥️ Estrutura de Classes
 
-# Main (Classe Principal)
+## Main (Classe Principal)
   * Jogo
-# Sprites
+## Sprites
   * Barrinha
   * Player
   * IA
   * Bola
-# Configs
-# Menus
+## Configs
+## Menus
   * Menu
