@@ -44,10 +44,12 @@ class Player(Barrinha):
         self.direcao = direcao_baixo - direcao_cima
 
 class IA(Barrinha):
-    def __init__(self, groups, nump, ball):
-        pass
-    def get_direction():
-        pass
+    def __init__(self, groups, nump,bola):
+        super().__init__(groups,nump)
+        self.velocidade = velocidades['IA']
+        self.bola = bola
+    def getDirecao(self):
+        self.direcao = 1 if self.bola.rect.centery > self.rect.centery else -1
 
 
 class Bola(pygame.sprite.Sprite):

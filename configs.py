@@ -14,7 +14,7 @@ pos = {
     'bola':(telaLargura/2,telaAltura/2)
 }
 velocidades = {
-    'jogador': 500, 'bola':450
+    'jogador': 500, 'bola':450, 'IA': 250
 }
 cores = {
     'barrinha' : (0,0,0),
