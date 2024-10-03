@@ -1,5 +1,6 @@
 from configs import *
 from sprites import *
+from menus import *
 
 class Jogo:
     def __init__(self):
@@ -9,6 +10,8 @@ class Jogo:
         self.fps = pygame.time.Clock()
         self.running = True
         self.bg = pygame.image.load(bgCaminho)
+        self.mainMenu = pygame.image.load(mainMenuCaminho)
+        self.menu = Menu(self.tela, mainMenuCaminho)
 
         #Sprites
         self.sprites = pygame.sprite.Group()
@@ -49,18 +52,21 @@ class Jogo:
 
             # Atualizar sprites
             
+            
             self.sprites.update(dt)
+            
 
-            self.tela.blit(self.bg,(0,0))
-            self.mostrarPlacar()
-            self.sprites.draw(self.tela)
+            self.menu.desenharMenu(self.tela,self.mainMenu)
+            while False:
+                self.tela.blit(self.bg,(0,0))
+                self.mostrarPlacar()
+                self.sprites.draw(self.tela)
             
 
             pygame.display.update()
 
         pygame.quit()
 
-    
 if __name__ == "__main__":
     jogo = Jogo()
     jogo.run()

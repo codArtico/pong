@@ -3,6 +3,7 @@ import os
 from os.path import join
 
 bgCaminho = os.path.join('pong','imagens','Quadra.jpg')
+mainMenuCaminho = os.path.join('pong','imagens','TelaInicial.jpg')
 
 telaLargura, telaAltura = 1280,720
 fps = 30
